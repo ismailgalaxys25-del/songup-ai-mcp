@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.songupai/songup-ai",
+  "title": "SongUp AI",
+  "description": "Find AI songs in 24 languages, start a custom song on SongUp AI, and find browser audio tools.",
+  "websiteUrl": "https://www.songupai.com/mcp-server",
+  "repository": {
+    "url": "https://github.com/ismailgalaxys25-del/songup-ai-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://www.songupai.com/mcp/agents"
+    }
+  ]
+}
