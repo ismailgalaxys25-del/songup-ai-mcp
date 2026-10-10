@@ -62,6 +62,22 @@ claude mcp add --transport http songup-ai https://www.songupai.com/mcp/agents
 }
 ```
 
+### Gemini CLI
+
+```bash
+gemini extensions install https://github.com/ismailgalaxys25-del/songup-ai-mcp
+```
+
+Or add it to `~/.gemini/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "songup-ai": { "httpUrl": "https://www.songupai.com/mcp/agents" }
+  }
+}
+```
+
 ### Claude and ChatGPT
 
 Use the in-chat versions, which play songs right in the conversation:
