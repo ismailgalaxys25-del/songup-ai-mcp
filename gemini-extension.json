@@ -1,0 +1,11 @@
+{
+  "name": "songup-ai",
+  "version": "1.0.0",
+  "description": "SongUp AI, the AI song maker: find AI songs in 24 languages with direct audio links, start a custom song from an idea, and find the right audio tool. Hosted, no API key.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "songup-ai": {
+      "httpUrl": "https://www.songupai.com/mcp/agents"
+    }
+  }
+}
