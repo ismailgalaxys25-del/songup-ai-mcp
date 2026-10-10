@@ -1,0 +1,291 @@
+{
+  "author": "ismailgalaxys25-del",
+  "authorUrl": "https://github.com/ismailgalaxys25-del",
+  "cloudEndpoint": "https://www.songupai.com/mcp/agents",
+  "description": "Hosted MCP server for SongUp AI, the AI song maker: find AI songs in 24 languages with direct audio links, start a custom song from an idea, and find the right audio tool. No API key.",
+  "homepage": "https://www.songupai.com/mcp-server",
+  "identifier": "ismailgalaxys25-del-songup-ai-mcp",
+  "name": "SongUp AI",
+  "prompts": [],
+  "resources": [],
+  "tools": [
+    {
+      "name": "find_songs",
+      "title": "Find songs in the SongUp AI library",
+      "description": "Finds ready-made AI songs from the SongUp AI library and returns each one with a direct link to its audio (MP3). Use it when the user wants to hear AI songs or example songs in a language, genre, mood or for an occasion (for example \"an Arabic love song\", \"Hindi lo-fi\", \"upbeat birthday pop\"). Songs are pre-made library tracks, not made from the user's own words; for a song from their own idea use start_custom_song.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string",
+            "enum": [
+              "English",
+              "Hindi",
+              "Spanish",
+              "French",
+              "German",
+              "Japanese",
+              "Korean",
+              "Portuguese",
+              "Arabic",
+              "Urdu",
+              "Turkish",
+              "Persian",
+              "Indonesian",
+              "Malay",
+              "Tamil",
+              "Punjabi",
+              "Bengali",
+              "Italian",
+              "Russian",
+              "Chinese",
+              "Vietnamese",
+              "Thai",
+              "Filipino",
+              "Swahili",
+              "Instrumental"
+            ],
+            "description": "Language the songs are sung in, or \"Instrumental\" for songs without vocals. Defaults to English."
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional genre, mood or occasion to match, in a few words (e.g. \"romantic\", \"lo-fi\", \"birthday\", \"rap\")."
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "How many songs to show (default 5)."
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "songs"
+            ]
+          },
+          "language": {
+            "type": "string"
+          },
+          "query": {
+            "type": "string"
+          },
+          "songs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "genre": {
+                  "type": "string"
+                },
+                "vocal": {
+                  "type": "string"
+                },
+                "about": {
+                  "type": "string"
+                },
+                "audioUrl": {
+                  "type": "string"
+                },
+                "cover": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "genre",
+                "about",
+                "audioUrl",
+                "cover"
+              ]
+            }
+          },
+          "createUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "language",
+          "query",
+          "songs",
+          "createUrl"
+        ]
+      },
+      "annotations": {
+        "title": "Find songs in the SongUp AI library",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "start_custom_song",
+      "title": "Start a custom song on SongUp AI",
+      "description": "Prepares a link that opens the SongUp AI song maker on songupai.com with the user's song idea already filled in, so they can turn it into a full song with vocals there. Use it when the user wants a song made from their own idea, story, names or lyrics (birthday, anniversary, love song, etc.). Nothing is created or charged by this tool; the song is made on songupai.com, which needs a free account.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "idea": {
+            "type": "string",
+            "description": "What the song is about, in the user's words: occasion, names, story, mood and style. Up to 500 characters."
+          },
+          "language": {
+            "type": "string",
+            "enum": [
+              "English",
+              "Hindi",
+              "Spanish",
+              "French",
+              "German",
+              "Japanese",
+              "Korean",
+              "Portuguese",
+              "Arabic",
+              "Urdu",
+              "Turkish",
+              "Persian",
+              "Indonesian",
+              "Malay",
+              "Tamil",
+              "Punjabi",
+              "Bengali",
+              "Italian",
+              "Russian",
+              "Chinese",
+              "Vietnamese",
+              "Thai",
+              "Filipino",
+              "Swahili"
+            ],
+            "description": "Language to sing in, if the user said one."
+          }
+        },
+        "required": [
+          "idea"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "create"
+            ]
+          },
+          "idea": {
+            "type": "string"
+          },
+          "language": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createUrl": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "idea",
+          "language",
+          "createUrl"
+        ]
+      },
+      "annotations": {
+        "title": "Start a custom song on SongUp AI",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "find_audio_tool",
+      "title": "Find a SongUp AI audio tool",
+      "description": "Finds the SongUp AI browser audio tool for a task the user describes, such as splitting a song into vocals and music, removing vocals for karaoke, making a mashup of two songs, removing background noise, mastering a track, finding chords, converting audio to MIDI, auto-tune or editing audio. Returns the matching tools with what each one does and a link to open it on songupai.com, where the user uploads their audio. This tool does not process audio itself.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "What the user wants to do with their audio, in a few words (e.g. \"separate vocals\", \"mashup maker\", \"audio editor\")."
+          }
+        },
+        "required": [
+          "task"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "tools"
+            ]
+          },
+          "task": {
+            "type": "string"
+          },
+          "matched": {
+            "type": "boolean"
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "does": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "does",
+                "url"
+              ]
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "task",
+          "matched",
+          "tools"
+        ]
+      },
+      "annotations": {
+        "title": "Find a SongUp AI audio tool",
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ],
+  "version": "1.0.0"
+}

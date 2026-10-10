@@ -1,0 +1,9 @@
+{
+  "name": "songup-ai-mcp",
+  "version": "1.0.0",
+  "description": "Hosted MCP server for SongUp AI, the AI song maker: find AI songs in 24 languages with direct audio links, start a custom song from an idea, and find the right audio tool. No API key.",
+  "homepage": "https://www.songupai.com/mcp-server",
+  "repository": "github:ismailgalaxys25-del/songup-ai-mcp",
+  "license": "MIT",
+  "private": true
+}
